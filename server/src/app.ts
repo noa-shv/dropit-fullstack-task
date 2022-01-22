@@ -1,5 +1,7 @@
 import express from 'express';
+const cors = require('cors');
 const app = express();
+app.use(cors());
 const port = 8080;
 
 const categories = require('./data/categories');
@@ -31,7 +33,13 @@ app.get('/products', (req, res) => {
                     pushToFilteredProducts = pushToFilteredProducts && product.title.includes(title);
                 }
                 if(pushToFilteredProducts) {
-                    filteredProducts.push(product);
+                    filteredProducts.push({
+                        id: product.id,
+                        title: product.title,
+                        image: product.image,
+                        category: product.category,
+                        price: product.price,
+                    });
                 }
             }
         })

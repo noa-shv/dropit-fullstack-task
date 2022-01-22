@@ -14,7 +14,12 @@ function CatalogFilters() {
     let [selectedCategories, setSelectedCategories] = useState([] as Array<string>);
 
     return (
-        <Toolbar>
+        <Toolbar
+            color="#578707"
+            sx={{
+            boxShadow: " 0 3px 4px -2px grey",
+                backgroundColor: '#f7f7f7',
+        }}>
             <StyledSelect
                 listItems={categories}
                 selectedItems={selectedCategories}

@@ -18,14 +18,24 @@ function CatalogView({img, title, price}: Props) {
                     image={img}
                     alt="green iguana"
                     sx={{
-                        maxHeight: "72%",
+                        maxHeight: "70%",
                         maxWidth: "100%",
                         objectFit: "contain"
                     }}
                 />
         <CardContent>
-                <Typography gutterBottom variant="subtitle1" component="div">{title}</Typography>
-                <Typography gutterBottom variant="h6" component="div">ILS{price}</Typography>
+                <Typography variant="subtitle2" component="div">{title}</Typography>
+                <Typography
+                    variant="button"
+                    component="div"
+                    sx={{
+                        fontWeight: 'bold',
+                        fontSize: 17,
+                        marginTop: 1.8,
+                    }}
+                >
+                    ILS{price}
+                </Typography>
     </CardContent>
         </Card>
     );
