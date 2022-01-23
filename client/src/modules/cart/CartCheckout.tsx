@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 function CartCheckout() {
+    const [name, setName] = useState('');
     return(
         <Card>
             <CardContent>
@@ -14,10 +17,28 @@ function CartCheckout() {
                 <TextField
                     size="small"
                     placeholder="your name"
+                    helperText="enter name to checkout"
+                    sx={{
+                        marginTop: "30px"
+                    }}
+                    onChange={
+                        (event)=>{setName(event.target.value)}
+                    }
                 >
                 </TextField>
             </CardContent>
-            <Button color="primary"> checkout </Button>
+            <CardActions>
+                <Button
+                    color="primary"
+                    size="large"
+                    variant="contained"
+                    disabled={name === ''}
+                    sx={{
+                        marginLeft: "10px",
+                        marginBottom: "10px"
+                    }}
+                > checkout </Button>
+            </CardActions>
         </Card>
     );
 }

@@ -1,12 +1,19 @@
 import express from 'express';
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cors());
 const port = 8080;
 
+import _ from 'lodash';
+
 const categories = require('./data/categories');
 const products = require('./data/products');
-let cart = [];
+let orders = [];
 
 app.get('/', (req, res) => {
     res.send('Hello World! aacjhjfgdxvxva');
@@ -62,17 +69,21 @@ app.get('/product/:id', (req, res) => {
 });
 
 app.get('/orders', (req, res) => {
-    res.send(cart);
+    res.send(orders);
 });
 
 app.get('/ordersNumber', (req, res) => {
-    res.send(cart.length);
+    res.send(orders.length);
 });
 
-app.post('/addOrder', (req, res) => {
+app.post('/createOrder', (req, res) => {
     // TODO: add typechecking
-    const item = req.body;
-    cart.push(item);
+    // TODO: add catch try
+    const {id} = req.body;
+    const product = _.find(products, {id})
+    const clonedProduct = _.cloneDeep(product);
+    orders.push(clonedProduct);
+    res.send(200);
 });
 
 app.listen(port, () => {
