@@ -1,0 +1,5 @@
+const applyCheckoutService = (app) => {
+    app.post('/checkout', (req, res) => {
+
+    })
+}

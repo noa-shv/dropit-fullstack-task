@@ -13,3 +13,9 @@ export interface ProductDetails extends Product {
         count: number;
     };
 }
+
+export interface ProductQueryParams {
+    categories?: Array<string>;
+    title?: string;
+    ids?: Array<string>;
+}

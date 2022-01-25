@@ -11,12 +11,6 @@ import useGetSummary from "./useGetSummary";
 function CartCheckout() {
     const [name, setName] = useState('');
     const summary = useGetSummary();
-    // const [cartSummary, setCartSummary] = useState({
-    //     numOfOrders: 0,
-    //     numOfProducts: 0,
-    //     totalPrice: 0
-    // });
-    // const fetchCartSummary = async () => (apiClient.order.getOrdersMeta());
 
     return(
         <Card>
