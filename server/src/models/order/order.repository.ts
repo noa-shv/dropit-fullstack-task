@@ -1,24 +1,48 @@
 import _ from 'lodash';
-import products from '../../data/products';
+import productRepository from '../product/product.repository'
 let orders = [];
+let largestId = 1;
 
-export default {
-    getAll: () => {
-        // reduce
-        // in reduced array, for each item go and count
-        return orders;
+interface OrderRepository {
+    getAll: () => Array<any>,
+    countOrders: () => number,
+    countProducts: () => number,
+    totalPrice: () => number,
+    create: (productId: string) => void,
+}
+
+const repository: OrderRepository =  {
+    getAll: function () {
+        const grouped = _.groupBy(orders, 'productId');
+        const formatedOrders = Object.keys(grouped).map((productId) => {
+            let product = productRepository.find(productId);
+             // @ts-ignore
+            product.numOfOrders = Object.keys(grouped[productId]).length;
+             return product;
+        });
+
+        return formatedOrders;
     },
     countOrders: () => {
       return orders.length
     },
     countProducts: () => {
-      // add unfamiliar id to array
-      // count ++
-      //
+        return _.uniqBy(orders, 'productId').length;
     },
-    create: (id) => {
-        const product = _.find(products, {id})
-        const clonedProduct = _.cloneDeep(product);
-        orders.push(clonedProduct);
+    totalPrice: () => {
+        let totalPrice = 0;
+
+        orders.forEach((order) => {
+            let product = productRepository.find(order.productId);
+            totalPrice += product.price;
+        });
+
+        return totalPrice;
+    },
+    create: (productId) => {
+        orders.push({id: largestId, productId});
+        largestId++;
     }
 }
+
+export default repository;

@@ -6,9 +6,17 @@ const applyOrderService = (app) => {
         res.send(orders);
     });
 
-    app.get('/ordersNumber', (req, res) => {
+    app.get('/orders/number', (req, res) => {
         const numOfOrders = repository.countOrders();
         res.send(numOfOrders);
+    });
+
+    app.get('/orders/meta', (req, res) => {
+        const numOfOrders = repository.countOrders();
+        const numOfProducts = repository.countProducts();
+        const totalPrice = repository.totalPrice();
+
+        res.send({numOfOrders, numOfProducts, totalPrice});
     });
 
     app.post('/createOrder', (req, res) => {

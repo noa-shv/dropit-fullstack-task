@@ -15,7 +15,7 @@ interface  Props {
 function CartTable({orders}: Props) {
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         {tableHeaders.map((header)=>(
@@ -31,7 +31,7 @@ function CartTable({orders}: Props) {
                             </TableCell>
                             <TableCell>{order.title}</TableCell>
                             <TableCell>{order.price}</TableCell>
-                            <TableCell>3</TableCell>
+                            <TableCell>{order.numOfOrders}</TableCell>
                         </TableRow>
 
                     ))}
