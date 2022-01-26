@@ -4,16 +4,20 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import {useDispatch} from "react-redux";
+import {bindActionCreators} from "redux";
+import {actionCreators} from "../../store/action-creators";
 
 interface Props {
     id: string;
   img: string;
   title: string;
   price: number;
-  addToCart: (id: string) => void;
 };
 
-function ProductView({id, img, title, price, addToCart}: Props) {
+function ProductView({id, img, title, price}: Props) {
+    const dispatch = useDispatch()
+    const {addOrder} = bindActionCreators(actionCreators, dispatch);
     return(
         <Card className="product-card">
             <div className="media-wrapper">
@@ -39,7 +43,7 @@ function ProductView({id, img, title, price, addToCart}: Props) {
                 </Typography>
                 <IconButton
                     sx={{position:'relative', bottom:'15%'}}
-                    onClick={() => addToCart(id)}
+                    onClick={() => addOrder(id)}
                 >
                     <AddIcon />
                 </IconButton>

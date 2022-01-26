@@ -39,7 +39,7 @@ function CartCheckout({orderProducts}: Props) {
                     color="primary"
                     size="large"
                     variant="contained"
-                    disabled={name === ''}
+                    disabled={name === '' || orderProducts.length === 0}
                     sx={{
                         marginLeft: "10px",
                         marginBottom: "10px"
