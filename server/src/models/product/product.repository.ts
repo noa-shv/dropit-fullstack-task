@@ -2,18 +2,16 @@ import products from '../../data/products';
 
 export default {
     getAll: (query) => {
-        const {offset=0, limit=products.length, category=[], id, title, sort} = query;
+        const {category=[], id, title} = query;
         let filteredProducts = [];
 
-        products.forEach((product, index) => {
-            if(index >= offset && index <= limit) {
+        products.forEach((product) => {
                 let pushToFilteredProducts = true;
 
                 if(id) {
                     pushToFilteredProducts =
                         pushToFilteredProducts && id.includes(`${product.id}`);
                 }
-
                 if(category.length > 0) {
                     pushToFilteredProducts =
                         pushToFilteredProducts && (category as string[]).includes(product.category);
@@ -30,7 +28,6 @@ export default {
                         price: product.price,
                     });
                 }
-            }
         })
 
         return filteredProducts;

@@ -1,24 +1,27 @@
 import api from '../../contexts/api';
-import {useGet, buildQueryString} from "../../hooks/useFetch";
-import {ProductQueryParams} from '../../types/product';
+import {buildQueryString} from "../../hooks/useFetch";
 import {Order} from "../../store/types";
 import {useEffect, useState} from "react";
 
 export default (orders: Array<Order>) => {
     let[orderProducts, setOrderProducts] = useState([] as any[]);
     const productIds = orders.map(order => order.productId);
-    const queryString = buildQueryString({ids: productIds})
 
-    useEffect(()=>{
-        api.product.getAll(queryString).then((products) => {
-            orders.forEach((order) => {
-                let productToEdit = products.find(product => product.id == order.productId);
-                productToEdit.numOfOrders = order.amount;
-            });
-            setOrderProducts(products);
-        })
+    const matchProductToOrder = async(): Promise<void> => {
+        const queryString = buildQueryString({ids: productIds});
+        const products = await api.product.getAll(queryString);
+        orders.forEach((order) => {
+            let productToEdit = products.find(product => product.id == order.productId);
+            productToEdit.amount = order.amount;
+        });
+        setOrderProducts(products);
+    };
+
+    useEffect(() => {
+        if(productIds.length > 0) {
+            matchProductToOrder();
+        }
     }, [])
 
     return {orderProducts};
-    // const {data: orderProducts } = useGet(api.product.getAll, [], {ids: productIds});
 }

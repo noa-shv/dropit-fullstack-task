@@ -22,11 +22,7 @@ function CatalogFilters({
                         }: Props) {
     return (
         <Toolbar
-            color="#578707"
-            sx={{
-            boxShadow: " 0 3px 4px -2px grey",
-                backgroundColor: '#f7f7f7',
-        }}>
+            sx={{boxShadow: "0 3px 4px -2px grey", backgroundColor: '#f7f7f7',}}>
             <StyledSelect
                 listItems={categories}
                 selectedItems={selectedCategories}
@@ -43,8 +39,7 @@ function CatalogFilters({
                         <InputAdornment position="end">
                            <SearchIcon/>
                         </InputAdornment>,
-                }}
-            >
+                }}>
             </TextField>
         </Toolbar>
     );

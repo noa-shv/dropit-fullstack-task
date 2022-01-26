@@ -1,23 +1,35 @@
-import {State, Action} from '../types'
+import {State, Order, Action} from '../types'
 import {ActionType} from '../types/action-types';
 
-const initialState = {
-    orders: []
-}
-export default (state: State = initialState , action:Action ) => {
+const orderState: Array<Order> = [];
+export default (state: Array<Order> = orderState , action:Action ) => {
     switch(action.type) {
         case ActionType.ADD_ORDER:{
             const productId = action.payload;
-            const productInCart = state.orders.find(order => order.productId == productId)
+            const productInCart = state.find(order => order.productId == productId)
             if(productInCart) {
                 productInCart.amount ++;
             } else {
-                state.orders.push({ productId, amount: 1 });
+                state.push({ productId, amount: 1 });
             }
 
-            return {...state};
+            return [...state];
         }
         default:
             return state
     }
+};
+
+export const selectNumberOfOrders = (state: State) => {
+        let numOfOrders = 0;
+        state.orders.forEach((order) => {
+            numOfOrders += order.amount;
+        });
+
+       return numOfOrders;
+};
+
+export const selectOrderProductIds = (state: State) => {
+    const productIds = state.orders.map(order => order.productId);
+    return productIds;
 }

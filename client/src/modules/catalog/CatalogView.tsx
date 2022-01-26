@@ -7,19 +7,14 @@ import api, {apiEntity} from '../../contexts/api';
 import {useSelector, useDispatch} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators} from '../../store/action-creators';
-import useGetProducts from "../../hooks/useGetProducts";
 
 function CatalogView() {
-    const state = useSelector((state) => state)
     const dispatch = useDispatch()
     const {addOrder} = bindActionCreators(actionCreators, dispatch);
 
     let [selectedCategories, setSelectedCategories] = useState([] as Array<string>);
     let [searchTitle, setSearchTitle] = useState('');
 
-    // const { data: products } = useGetProducts(
-    //         [selectedCategories, searchTitle],
-    //         {categories: selectedCategories, title: searchTitle});
     const { data: products } = useFetch(
         apiEntity.product,
             [selectedCategories, searchTitle],
@@ -28,8 +23,6 @@ function CatalogView() {
 
     const addToCart = (productId: string) => {
         addOrder(productId);
-        // TODO: handle error
-        api[apiEntity.order].create(productId).then((res)=>console.log(res));
     }
 
     return (

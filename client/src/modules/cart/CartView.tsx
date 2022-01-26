@@ -1,24 +1,20 @@
 import CartTable from './CartTable';
 import {Grid} from '@mui/material';
 import CartCheckout from './CartCheckout';
-import useFetch from '../../hooks/useFetch';
-import {apiEntity} from '../../contexts/api';
 import {useSelector} from "react-redux";
 import {RootState} from '../../store/reducers';
 import useGetOrderProducts from "./useGetOrderProducts";
 
 function CartView() {
-    const ord = useSelector((state: RootState) => state.orders.orders);
-    const {orderProducts} = useGetOrderProducts(ord);
-    // const {data: order}
-    // const { data: orders } = useFetch(apiEntity.order, []);
+    const orders = useSelector((state: RootState) => state.orders);
+    const {orderProducts} = useGetOrderProducts(orders);
     return (
         <Grid container spacing={2} justifyContent="center">
             <Grid item xs={7}>
-               <CartTable orders={orderProducts}/>
+               <CartTable orderProducts={orderProducts}/>
             </Grid>
             <Grid item xs={3}>
-                <CartCheckout />
+                <CartCheckout orderProducts={orderProducts}/>
             </Grid>
         </Grid>
     );

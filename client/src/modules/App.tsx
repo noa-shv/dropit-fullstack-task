@@ -1,5 +1,4 @@
 import React from 'react';
-// import DropitAppBar from './app-bar/DropitAppBar';
 import AppRouter from '../contexts/router';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 

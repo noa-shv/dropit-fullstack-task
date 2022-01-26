@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import apiClient from '../../contexts/api/apiClient';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -8,16 +7,20 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import useGetSummary from "./useGetSummary";
 
-function CartCheckout() {
+interface Props {
+    orderProducts: Array<any>
+}
+
+function CartCheckout({orderProducts}: Props) {
     const [name, setName] = useState('');
-    const summary = useGetSummary();
+    const summary = useGetSummary(orderProducts);
 
     return(
         <Card>
             <CardContent>
                 <Typography variant="h5">{summary.numOfOrders} orders</Typography>
                 <Typography variant="h5">{summary.numOfProducts} products</Typography>
-                <Typography variant="h6">{summary.totalPrice} Sub-total ILS234</Typography>
+                <Typography variant="h6">Sub-total ILS{summary.totalPrice}</Typography>
                 <TextField
                     size="small"
                     placeholder="your name"

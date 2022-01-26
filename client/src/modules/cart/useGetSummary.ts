@@ -1,4 +1,3 @@
-import api from "../../contexts/api";
 import {useEffect, useState} from "react";
 
 interface OrdersSummary {
@@ -7,14 +6,23 @@ interface OrdersSummary {
     totalPrice: number;
 }
 
-function useGetSummary(): OrdersSummary {
-    let[summary, setSummary] = useState([] as any[]);
+function useGetSummary(orderProducts: Array<any>): OrdersSummary {
+    let[summary, setSummary] = useState({} as OrdersSummary);
 
-    useEffect(()=>{
-        api.order.getOrdersMeta().then(setSummary);
-    }, []);
+    let sum = {
+        numOfOrders: 0,
+        numOfProducts: 0,
+        totalPrice: 0
+    }
+    useEffect(() => {
+        orderProducts.forEach((orderProduct) => {
+            sum.numOfOrders += orderProduct.amount;
+            sum.totalPrice += orderProduct.price * orderProduct.amount;
+            sum.numOfProducts ++;
+        });
+        setSummary(sum);
+    }, [orderProducts]);
 
-    // @ts-ignore
     return summary;
 }
 

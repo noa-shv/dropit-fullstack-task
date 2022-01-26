@@ -9,31 +9,30 @@ import Paper from '@mui/material/Paper';
 const tableHeaders = [' ', 'title', 'price', 'quantity'];
 
 interface  Props {
-    orders: Array<any>;
+    orderProducts: Array<any>;
 }
 
-function CartTable({orders}: Props) {
+function CartTable({orderProducts}: Props) {
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="simple table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         {tableHeaders.map((header)=>(
-                            <TableCell>{header}</TableCell>
+                            <TableCell key={header}>{header}</TableCell>
                         ))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {orders.map((order) => (
-                        <TableRow key={order.id}>
+                    {orderProducts.map((orderProduct) => (
+                        <TableRow key={orderProduct.id}>
                             <TableCell>
-                                <img src={order.image} width="50" height="60" />
+                                <img src={orderProduct.image} width="50" height="60" />
                             </TableCell>
-                            <TableCell>{order.title}</TableCell>
-                            <TableCell>{order.price}</TableCell>
-                            <TableCell>{order.numOfOrders}</TableCell>
+                            <TableCell>{orderProduct.title}</TableCell>
+                            <TableCell>{orderProduct.price}</TableCell>
+                            <TableCell>{orderProduct.amount}</TableCell>
                         </TableRow>
-
                     ))}
                 </TableBody>
             </Table>

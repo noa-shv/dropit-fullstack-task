@@ -15,21 +15,12 @@ interface Props {
 
 function ProductView({id, img, title, price, addToCart}: Props) {
     return(
-        <Card sx={{
-            height: "75vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            paddingTop: "20px",
-            paddingLeft: "20px",
-            paddingRight:"15px",
-        }}>
+        <Card className="product-card">
             <div className="media-wrapper">
                 <CardMedia
                     component="img"
                     height="auto"
                     image={img}
-                    alt="green iguana"
                     sx={{
                         maxHeight: "100%",
                         maxWidth: "100%",
@@ -37,20 +28,12 @@ function ProductView({id, img, title, price, addToCart}: Props) {
                     }}
                 />
             </div>
-                <Typography
-                    variant="subtitle2"
-                    component="div"
-                >
-                    {title}
-                </Typography>
+            <Typography variant="subtitle2" component="div"> {title}</Typography>
             <div className="card-cations">
                 <Typography
                     variant="button"
                     component="div"
-                    sx={{
-                        fontWeight: 'bold',
-                        fontSize: 17,
-                    }}
+                    sx={{fontWeight: 'bold', fontSize: 17,}}
                 >
                     ILS{price}
                 </Typography>

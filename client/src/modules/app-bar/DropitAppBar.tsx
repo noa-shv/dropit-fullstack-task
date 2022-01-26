@@ -6,21 +6,12 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import DropitSvgLogo from './DropitSvgLogo';
-import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {RootState} from "../../store/reducers";
+import {selectNumberOfOrders} from "../../store/reducers/orders-reducer";
 
-// TODO add number hook
 function DropitAppBar() {
-    const orders = useSelector((state: RootState) => state.orders);
-    const [numOfOrders, setNumOfOrders] = useState(0);
-    useEffect(()=>{
-        let totalOrders = 0;
-        orders.orders.forEach((order) => {
-            totalOrders += order.amount;
-        });
-        setNumOfOrders(totalOrders);
-    }, [orders]);
+    const numOfOrders = useSelector(selectNumberOfOrders);
+
     return (
         <AppBar color="inherit" position="static"  elevation={0}>
           <Toolbar>
