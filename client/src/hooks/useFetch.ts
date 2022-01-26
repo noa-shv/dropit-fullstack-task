@@ -3,15 +3,18 @@ import {buildQueryString} from '../contexts/api';
 import {ProductQueryParams} from '../types/product';
 
 function useFetch (apiCallback: (queryString: string) => any, dependencies: Array<unknown>, queryParams?:  ProductQueryParams) {
-    let[data, setData] = useState([] as any[]);
+    const [data, setData] = useState([] as any[]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const queryString = queryParams? buildQueryString(queryParams) : '';
 
     useEffect(()=>{
-        apiCallback(queryString).then(setData);
+        apiCallback(queryString).then(setData).then(() => {
+            setIsLoading(false);
+        });
     }, dependencies);
 
-    return { data };
+    return { data, isLoading };
 }
 
 export default useFetch;

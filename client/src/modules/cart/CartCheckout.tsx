@@ -7,11 +7,21 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import useGetSummary from "./useGetSummary";
 
-interface Props {
-    orderProducts: Array<any>
+function CheckoutCompleted({isVisible}: {isVisible: boolean}) {
+    return isVisible? (
+        <Typography> Thank you for your purchase! </Typography>
+    ): (
+        <div />
+    );
 }
 
-function CartCheckout({orderProducts}: Props) {
+interface Props {
+    orderProducts: Array<any>;
+    handleCheckout: (name: string) => void;
+    isCheckoutCompleted: boolean;
+}
+
+function CartCheckout({orderProducts, handleCheckout, isCheckoutCompleted}: Props) {
     const [name, setName] = useState('');
     const summary = useGetSummary(orderProducts);
 
@@ -40,12 +50,14 @@ function CartCheckout({orderProducts}: Props) {
                     size="large"
                     variant="contained"
                     disabled={name === '' || orderProducts.length === 0}
+                    onClick={() => handleCheckout(name)}
                     sx={{
                         marginLeft: "10px",
                         marginBottom: "10px"
                     }}
                 > checkout </Button>
             </CardActions>
+            <CheckoutCompleted isVisible={isCheckoutCompleted}/>
         </Card>
     );
 }

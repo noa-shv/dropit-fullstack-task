@@ -3,11 +3,12 @@ import ProductCard from "./ProductCard";
 import NoResults from '../../components/NoResults';
 
 interface Props {
-    products: Array<any>
+    products: Array<any>;
+    isLoading: boolean;
 }
 
-function ProductGrid({products}: Props) {
-    if(products.length > 0) {
+function ProductGrid({products, isLoading}: Props) {
+    if(products.length > 0 || isLoading) {
         return (
             <Grid container spacing={3}>
                 {products.map((prod) => (

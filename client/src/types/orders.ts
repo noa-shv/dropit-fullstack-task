@@ -8,3 +8,8 @@ export interface Order {
 export interface OrderProduct extends Product {
     amount: number;
 }
+
+export interface Checkout {
+    name: string;
+    orders: Array<Order>
+}

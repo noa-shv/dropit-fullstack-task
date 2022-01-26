@@ -1,16 +1,15 @@
 import Axios from 'axios';
 import {Product} from '../../types/product';
+import {Order, Checkout} from '../../types/orders';
 
 const AxiosClient = Axios.create({
     baseURL: 'http://localhost:8080',
 });
 
-// TODO: add product types
 export default {
-    // TODO: add filters
     product: {
         getAll: async (queryString?: string): Promise<Product[]> =>
-            AxiosClient.get<any[]>(`/products?${queryString}`).then(
+            AxiosClient.get<Product[]>(`/products?${queryString}`).then(
                 (res) => res.data
             ),
     },
@@ -19,5 +18,9 @@ export default {
             AxiosClient.get<string[]>(`/categories`).then(
                 (res) => res.data
             ),
+    },
+    checkout: {
+        checkoutCart: async(checkout: Checkout): Promise<void> =>
+            AxiosClient.post('/checkout', checkout)
     }
 }
