@@ -17,5 +17,5 @@ export interface ProductDetails extends Product {
 export interface ProductQueryParams {
     categories?: Array<string>;
     title?: string;
-    ids?: Array<string>;
+    ids?: Array<number>;
 }

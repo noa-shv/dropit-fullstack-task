@@ -9,7 +9,7 @@ import {bindActionCreators} from "redux";
 import {actionCreators} from "../../store/action-creators";
 
 interface Props {
-    id: string;
+    id: number;
   img: string;
   title: string;
   price: number;

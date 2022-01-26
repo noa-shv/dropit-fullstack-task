@@ -7,7 +7,7 @@ import useGetOrderProducts from "./useGetOrderProducts";
 
 function CartView() {
     const orders = useSelector((state: RootState) => state.orders);
-    const {orderProducts} = useGetOrderProducts(orders);
+    const orderProducts = useGetOrderProducts(orders);
     return (
         <Grid container spacing={2} justifyContent="center">
             <Grid item xs={7}>

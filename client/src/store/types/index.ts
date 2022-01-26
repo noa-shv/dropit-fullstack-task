@@ -1,15 +1,10 @@
-import {ActionType} from "./action-types";
+import {Order} from '../../types/orders';
 
 export interface Action {
     type: string,
-    payload: string
+    payload: number
 }
 
 export interface State {
     orders: Array<Order>
-}
-
-export interface Order {
-    productId: string,
-    amount: number,
 }

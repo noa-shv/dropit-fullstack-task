@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
-import apiEntity from './apiEntities';
+import {buildQueryString} from './utils';
 
 export default apiClient;
-export { apiEntity };
+export { buildQueryString };

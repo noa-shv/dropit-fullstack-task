@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import CatalogFilters from './CatalogFilters';
 import useFetch from '../../hooks/useFetch';
-import api, {apiEntity} from '../../contexts/api';
+import api from '../../contexts/api';
 import ProductGrid from './ProductGrid';
 
 function CatalogView() {
@@ -9,10 +9,10 @@ function CatalogView() {
     let [searchTitle, setSearchTitle] = useState('');
 
     const { data: products } = useFetch(
-        apiEntity.product,
+        api.product.getAll,
             [selectedCategories, searchTitle],
             {categories: selectedCategories, title: searchTitle});
-    const { data: categories } = useFetch(apiEntity.category, []);
+    const { data: categories } = useFetch(api.category.getAll, []);
 
         return (
             <div>
