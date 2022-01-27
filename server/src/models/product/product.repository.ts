@@ -1,24 +1,32 @@
 import products from '../../data/products';
-import {Product} from '../../types/products';
+import {Product, ProductDetails} from '../../types/products';
+import qs from 'qs';
+
+interface Query {
+    category?: Array<string>;
+    id?: Array<string>;
+    title?: string;
+}
 
 export default {
     getAll: (query): Array<Product> => {
-        const {category=[], id, title} = query;
+        const {category: categories =[], id: ids, title}: Query = qs.parse(query);
         let filteredProducts = [];
 
         products.forEach((product) => {
                 let pushToFilteredProducts = true;
 
-                if(id) {
+                if(ids) {
                     pushToFilteredProducts =
-                        pushToFilteredProducts && id.includes(`${product.id}`);
+                        pushToFilteredProducts && ids.includes(`${product.id}`);
                 }
-                if(category.length > 0) {
+                if(categories.length > 0) {
                     pushToFilteredProducts =
-                        pushToFilteredProducts && (category as string[]).includes(product.category);
+                        pushToFilteredProducts && (categories as Array<string>).includes(product.category);
                 }
                 if(title) {
-                    pushToFilteredProducts = pushToFilteredProducts && product.title.includes(title);
+                    pushToFilteredProducts =
+                        pushToFilteredProducts && product.title.toLowerCase().includes(title.toLowerCase());
                 }
                 if(pushToFilteredProducts) {
                     filteredProducts.push({
@@ -33,5 +41,5 @@ export default {
 
         return filteredProducts;
     },
-    find: (id): Product => (products.find(product => product.id == id))
+    find: (id): ProductDetails => (products.find(product => product.id == id))
 }

@@ -13,7 +13,8 @@
     justify-content: center;
 }
 
-.card-cations {
+.card-actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }

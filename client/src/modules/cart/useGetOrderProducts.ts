@@ -9,7 +9,7 @@ interface UseGetOrderProducts {
     setIsLoading: (isLoading: boolean) => void;
 }
 
-export default (orders: Array<Order>): UseGetOrderProducts => {
+const useGetOrderProducts = (orders: Array<Order>): UseGetOrderProducts => {
     const [orderProducts, setOrderProducts] = useState([] as Array<OrderProduct>);
     const [isLoading, setIsLoading] = useState(true);
     const productIds = orders.map(order => order.productId);
@@ -39,3 +39,5 @@ export default (orders: Array<Order>): UseGetOrderProducts => {
 
     return {orderProducts, isLoading, setIsLoading};
 }
+
+export default useGetOrderProducts;

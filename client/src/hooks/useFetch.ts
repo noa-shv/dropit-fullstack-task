@@ -17,7 +17,7 @@ function useFetch<Type, QueryParamType = void>(
     });
 
     useEffect(()=>{
-        apiCallback(query ).then(setData).then(() => {
+        apiCallback(query).then(setData).then(() => {
             setIsLoading(false);
         });
     }, dependencies);

@@ -9,7 +9,9 @@ import useGetSummary from "./useGetSummary";
 
 function CheckoutCompleted({isVisible}: {isVisible: boolean}) {
     return isVisible? (
-        <Typography> Thank you for your purchase! </Typography>
+        <CardContent>
+          <Typography> purchase confirmed! </Typography>
+        </CardContent>
     ): (
         <div />
     );
@@ -30,7 +32,7 @@ function CartCheckout({orderProducts, handleCheckout, isCheckoutCompleted}: Prop
             <CardContent>
                 <Typography variant="h5">{summary.numOfOrders} orders</Typography>
                 <Typography variant="h5">{summary.numOfProducts} products</Typography>
-                <Typography variant="h6">Sub-total ILS{summary.totalPrice}</Typography>
+                <Typography variant="h6">Sub-total ILS{summary.totalPrice?.toFixed(2)}</Typography>
                 <TextField
                     size="small"
                     placeholder="your name"

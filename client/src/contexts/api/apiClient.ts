@@ -1,15 +1,19 @@
 import Axios from 'axios';
-import {Product} from '../../types/product';
+import {Product, ProductDetails} from '../../types/product';
 import {Checkout} from '../../types/orders';
 
 const AxiosClient = Axios.create({
     baseURL: 'http://localhost:8080',
 });
 
-export default {
+const apiClient = {
     product: {
         getAll: async (queryString?: string): Promise<Product[]> =>
             AxiosClient.get<Product[]>(`/products?${queryString}`).then(
+                (res) => res.data
+            ),
+        find: async (id: string | undefined): Promise<ProductDetails> =>
+            AxiosClient.get<ProductDetails>(`/product/${id}`).then(
                 (res) => res.data
             ),
     },
@@ -23,4 +27,6 @@ export default {
         checkoutCart: async(checkout: Checkout): Promise<void> =>
             AxiosClient.post('/checkout', checkout)
     }
-}
+};
+
+export default apiClient;

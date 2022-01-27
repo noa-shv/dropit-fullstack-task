@@ -1,15 +1,7 @@
 import React from 'react';
 import AppRouter from '../contexts/router';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-// Todo: add seprate theme page
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#000000',
-        },
-    },
-});
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../theme';
 
 function App() {
   return (

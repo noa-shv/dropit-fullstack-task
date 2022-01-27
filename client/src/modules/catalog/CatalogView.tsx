@@ -7,13 +7,13 @@ import Loading from '../../components/Loading';
 import {Product, ProductQueryParams} from '../../types/product';
 
 function CatalogView() {
-    let [selectedCategories, setSelectedCategories] = useState([] as Array<string>);
-    let [searchTitle, setSearchTitle] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([] as Array<string>);
+    const [searchTitle, setSearchTitle] = useState('');
 
     const { data: products, isLoading } = useFetch<Product, ProductQueryParams>(
         api.product.getAll,
             [selectedCategories, searchTitle],
-            {categories: selectedCategories, title: searchTitle});
+            {category: selectedCategories, title: searchTitle});
     const { data: categories } = useFetch<string>(api.category.getAll, []);
 
         return (

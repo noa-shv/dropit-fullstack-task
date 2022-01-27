@@ -29,7 +29,7 @@ function StyledSelect({listItems, selectedItems, handleSelect}: Props) {
                 multiple
                 value={innerSelectedItems}
                 SelectDisplayProps={{ style: { paddingTop: 8, paddingBottom: 8 } }}
-                style={{ height: "40px", width: "200px" }}
+                style={{ height: "40px", width: "180px" }}
                 renderValue={(selected) => selected.join(', ')}
                 onChange={handleEvent}
             >

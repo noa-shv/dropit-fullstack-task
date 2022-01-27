@@ -13,7 +13,11 @@ function DropitAppBar() {
     const numOfOrders = useSelector(selectNumberOfOrders);
 
     return (
-        <AppBar color="inherit" position="static"  elevation={0}>
+        <AppBar
+            color="inherit"
+            position="static"
+            elevation={0}
+        >
           <Toolbar>
               <Link to="/catalog">
                  <DropitSvgLogo />

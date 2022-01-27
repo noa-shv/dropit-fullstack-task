@@ -4,7 +4,7 @@ import {Order} from '../../types/orders';
 
 const orderState: Array<Order> = [];
 
-export default (state: Array<Order> = orderState , action:Action) => {
+const ordersReducer = (state: Array<Order> = orderState , action:Action) => {
     switch(action.type) {
         case ActionType.ADD_ORDER:{
             const productId = action.payload;
@@ -21,6 +21,8 @@ export default (state: Array<Order> = orderState , action:Action) => {
             return state
     }
 };
+
+export default ordersReducer;
 
 export const selectNumberOfOrders = (state: State): Number => {
         let numOfOrders = 0;

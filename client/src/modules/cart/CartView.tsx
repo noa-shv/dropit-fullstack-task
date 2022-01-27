@@ -1,3 +1,4 @@
+import {useState} from "react";
 import CartTable from './CartTable';
 import {Grid} from '@mui/material';
 import CartCheckout from './CartCheckout';
@@ -6,7 +7,7 @@ import {RootState} from '../../store/reducers';
 import useGetOrderProducts from './useGetOrderProducts';
 import Loading from '../../components/Loading';
 import api from '../../contexts/api';
-import {useState} from "react";
+import BackButton from '../../components/BackButton';
 
 function CartView() {
     const orders = useSelector((state: RootState) => state.orders);
@@ -19,8 +20,10 @@ function CartView() {
         setIsLoading(false);
         setIsCheckedOut(true)
     }
+
     return (
         <div>
+            <BackButton />
             <Loading isVisible={isLoading}/>
             <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={7}>

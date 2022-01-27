@@ -7,7 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import NoResults from '../../components/NoResults';
 
-const tableHeaders = [' ', 'title', 'price', 'quantity'];
+const tableHeaders = [' ', 'title', 'unit price', 'quantity', 'total price'];
 
 interface  Props {
     orderProducts: Array<any>;
@@ -29,11 +29,16 @@ function CartTable({orderProducts}: Props) {
                         {orderProducts.map((orderProduct) => (
                             <TableRow key={orderProduct.id}>
                                 <TableCell>
-                                    <img src={orderProduct.image} width="50" height="60"/>
+                                    <img
+                                        src={orderProduct.image}
+                                        width="50"
+                                        height="60"
+                                        alt={orderProduct.title}/>
                                 </TableCell>
                                 <TableCell>{orderProduct.title}</TableCell>
                                 <TableCell>{orderProduct.price}</TableCell>
                                 <TableCell>{orderProduct.amount}</TableCell>
+                                <TableCell>{(orderProduct.price * orderProduct.amount)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

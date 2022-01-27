@@ -7,24 +7,27 @@ import AddIcon from '@mui/icons-material/Add';
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
 import {actionCreators} from "../../store/action-creators";
+import {Product} from '../../types/product'
 
 interface Props {
-    id: number;
-  img: string;
-  title: string;
-  price: number;
-};
+    product: Product;
+}
 
-function ProductView({id, img, title, price}: Props) {
+function ProductCard({product}: Props) {
     const dispatch = useDispatch()
     const {addOrder} = bindActionCreators(actionCreators, dispatch);
+    const handleAdd = (event: React.MouseEvent<HTMLElement>) => {
+        addOrder(product.id);
+        event.preventDefault();
+    };
+
     return(
         <Card className="product-card">
             <div className="media-wrapper">
                 <CardMedia
                     component="img"
                     height="auto"
-                    image={img}
+                    image={product.image}
                     sx={{
                         maxHeight: "100%",
                         maxWidth: "100%",
@@ -32,18 +35,17 @@ function ProductView({id, img, title, price}: Props) {
                     }}
                 />
             </div>
-            <Typography variant="subtitle2" component="div"> {title}</Typography>
-            <div className="card-cations">
+            <Typography variant="subtitle2" component="div"> {product.title}</Typography>
+            <div className="card-actions">
                 <Typography
                     variant="button"
                     component="div"
                     sx={{fontWeight: 'bold', fontSize: 17,}}
                 >
-                    ILS{price}
+                    ILS{product.price}
                 </Typography>
                 <IconButton
-                    sx={{position:'relative', bottom:'15%'}}
-                    onClick={() => addOrder(id)}
+                    onClick={handleAdd}
                 >
                     <AddIcon />
                 </IconButton>
@@ -52,4 +54,4 @@ function ProductView({id, img, title, price}: Props) {
     );
 }
 
-export default ProductView;
+export default ProductCard;
