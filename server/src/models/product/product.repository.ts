@@ -1,7 +1,8 @@
 import products from '../../data/products';
+import {Product} from '../../types/products';
 
 export default {
-    getAll: (query) => {
+    getAll: (query): Array<Product> => {
         const {category=[], id, title} = query;
         let filteredProducts = [];
 
@@ -32,5 +33,5 @@ export default {
 
         return filteredProducts;
     },
-    find: (id) => (products.find(product => product.id == id))
+    find: (id): Product => (products.find(product => product.id == id))
 }

@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import {Product} from '../../types/product';
-import {Order, Checkout} from '../../types/orders';
+import {Checkout} from '../../types/orders';
 
 const AxiosClient = Axios.create({
     baseURL: 'http://localhost:8080',

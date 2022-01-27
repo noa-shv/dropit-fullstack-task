@@ -1,15 +1,23 @@
 import {useEffect, useState} from 'react';
-import {buildQueryString} from '../contexts/api';
-import {ProductQueryParams} from '../types/product';
+import queryString from 'query-string';
 
-function useFetch (apiCallback: (queryString: string) => any, dependencies: Array<unknown>, queryParams?:  ProductQueryParams) {
-    const [data, setData] = useState([] as any[]);
+function useFetch<Type, QueryParamType = void>(
+    apiCallback: (queryString: string) => Promise<Array<Type>>,
+    dependencies: Array<any>,
+    queryParams?:  QueryParamType
+
+) {
+    const [data, setData] = useState([] as Array<Type>);
     const [isLoading, setIsLoading] = useState(true);
 
-    const queryString = queryParams? buildQueryString(queryParams) : '';
+    const query = queryString.stringify(queryParams || {}, {
+        arrayFormat: 'bracket',
+        skipNull:true,
+        skipEmptyString: true,
+    });
 
     useEffect(()=>{
-        apiCallback(queryString).then(setData).then(() => {
+        apiCallback(query ).then(setData).then(() => {
             setIsLoading(false);
         });
     }, dependencies);

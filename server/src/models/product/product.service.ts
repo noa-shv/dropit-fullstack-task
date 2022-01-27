@@ -12,7 +12,6 @@ const applyProductService = (app) => {
 
     app.get('/product/:id', (req, res) => {
         const { id } = req.params;
-        // TODO: add err for when not found
         try {
             const foundProduct = repository.find(id);
             res.send(foundProduct);

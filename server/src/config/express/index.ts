@@ -1,9 +1,11 @@
 import express from 'express';
-const cors = require('cors');
-const bodyParser = require('body-parser');
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 export default (app) => {
     app.use(express.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cors());
+    app.use(morgan('dev'));
 }

@@ -4,16 +4,17 @@ import useFetch from '../../hooks/useFetch';
 import api from '../../contexts/api';
 import ProductGrid from './ProductGrid';
 import Loading from '../../components/Loading';
+import {Product, ProductQueryParams} from '../../types/product';
 
 function CatalogView() {
     let [selectedCategories, setSelectedCategories] = useState([] as Array<string>);
     let [searchTitle, setSearchTitle] = useState('');
 
-    const { data: products, isLoading } = useFetch(
+    const { data: products, isLoading } = useFetch<Product, ProductQueryParams>(
         api.product.getAll,
             [selectedCategories, searchTitle],
             {categories: selectedCategories, title: searchTitle});
-    const { data: categories } = useFetch(api.category.getAll, []);
+    const { data: categories } = useFetch<string>(api.category.getAll, []);
 
         return (
             <div>
